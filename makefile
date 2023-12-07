@@ -1,17 +1,21 @@
-exe: fonctions.o main.o
+exe: fonctions.o fonctionsDb.o main.o
 	@echo "Compilation de l'exécutable."
-	gcc fonctions.o main.o -o comptaPercing.exe
+	gcc fonctions.o fonctionsDb.o main.o -o comptaPercing.exe
 
-test: fonctions.o test.o
-	@echo "Compilation des tests."
-	gcc fonctions.o test.o -o test
+sansDb: fonctions.o main.o
+	@echo "Compilation sans db."
+	gcc fonctions.o main.o -o sansDb.exe
 
 test.o: main.c fonctions.h
 	gcc -c -Wall test.c -o test.o
 
 fonctions.o: fonctions.c fonctions.h
 	@echo "Compilation de fonctions."
-	gcc -c -Wall fonctions.c  -o fonctions.o
+	gcc -c -Wall fonctions.c -o fonctions.o
+
+fonctionsDb.o: fonctionsDb.c fonctions.h
+	@echo "Compilation de fonctionsDb."
+	gcc -c -Wall fonctionsDb.c -o fonctionsDb.o
 
 main.o: main.c fonctions.h
 	@echo "Compilation du main."
